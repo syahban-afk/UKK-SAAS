@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('detail_pemesanans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_pemesanan')->constrained();
-            $table->foreignId('id_paket')->constrained();
-            $table->integer('subtotal');
+            $table->foreignId('id_pemesanan')->constrained('pemesanans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('id_paket');
+            $table->unsignedBigInteger('subtotal');
             $table->timestamps();
         });
     }

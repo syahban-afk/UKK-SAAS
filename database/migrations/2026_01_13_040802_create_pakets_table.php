@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('pakets', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_paket', 500);
-            $table->enum('jenis_paket', ['Pernikahan', 'Selamatan', 'Ulang Tahun', 'Studi Tour', 'Rapat']);
-            $table->integer('jumlah_pax', 11);
-            $table->integer('harga_paket', 11);
-            $table->string('deskripsi');
+            $table->string('nama_paket', 50);
+            $table->enum('jenis', ['Prasmanan', 'Box']);
+            $table->enum('kategori', ['Pernikahan', 'Selamatan', 'Ulang Tahun', 'Studi Tour', 'Rapat']);
+            $table->integer('jumlah_pax');
+            $table->integer('harga_paket');
+            $table->text('deskripsi');
             $table->string('foto1', 255);
             $table->string('foto2', 255);
             $table->string('foto3', 255);

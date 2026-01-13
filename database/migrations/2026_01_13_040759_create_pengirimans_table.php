@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('pengirimans', function (Blueprint $table) {
             $table->id();
-            $table->date('tgl_kirim');
-            $table->date('tgl_tiba');
+            $table->dateTime('tgl_kirim');
+            $table->dateTime('tgl_tiba');
             $table->enum('status_kirim', ['Sedang Dikirim', 'Tiba Ditujuan'])->default('Sedang Dikirim');
             $table->string('bukti_foto', 255);
-            $table->foreignId('id_pesan')->constrained();
-            $table->foreignId('id_user')->constrained();
+            $table->foreignId('id_pesan')->constrained('pemesanans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
