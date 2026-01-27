@@ -20,6 +20,18 @@ class pelanggans_model extends Model
         'foto',
     ];
 
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+    
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
+
     public function pemesanans()
     {
         return $this->hasMany(pemesanans_model::class, 'id_pelanggan');
