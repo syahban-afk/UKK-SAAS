@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('detail_jenis_pembayarans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_jenis_pembayaran')->constrained('jenis_pembayarans')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('no_rek', 25);
-            $table->string('tempat_bayar', 50);
-            $table->string('logo', 255);
+            $table->string('no_rek', 25)->nullable();
+            $table->string('tempat_bayar', 50)->nullable();
+            $table->string('logo', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('password', 255);
             $table->date('tgl_lahir');
             $table->string('telepon', 15);
-            $table->string('alamat1', 255);
-            $table->string('alamat2', 255);
-            $table->string('alamat3', 255);
-            $table->string('kartu_id', 255);
-            $table->string('foto', 255);
+            $table->string('alamat1', 255)->nullable();
+            $table->string('alamat2', 255)->nullable();
+            $table->string('alamat3', 255)->nullable();
+            $table->string('kartu_id', 255)->nullable();
+            $table->string('foto', 255)->nullable();
             $table->timestamps();
         });
     }

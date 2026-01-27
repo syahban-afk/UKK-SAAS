@@ -19,9 +19,9 @@ return new class extends Migration
             $table->integer('jumlah_pax');
             $table->integer('harga_paket');
             $table->text('deskripsi');
-            $table->string('foto1', 255);
-            $table->string('foto2', 255);
-            $table->string('foto3', 255);
+            $table->string('foto1', 255)->nullable();
+            $table->string('foto2', 255)->nullable();
+            $table->string('foto3', 255)->nullable();
             $table->timestamps();
         });
     }

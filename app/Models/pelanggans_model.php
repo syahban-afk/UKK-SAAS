@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class pelanggans_model extends Model
+class pelanggans_model extends Authenticatable
 {
     protected $table = 'pelanggans';
     protected $fillable = [
@@ -24,7 +25,7 @@ class pelanggans_model extends Model
         'password',
         'remember_token',
     ];
-    
+
     protected function casts(): array
     {
         return [
