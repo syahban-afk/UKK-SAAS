@@ -24,11 +24,32 @@ class UsersManagementController extends Controller
             ->all();
         $users = User::whereIn('level', ['admin', 'kurir'])->get();
 
-        return view('dashboard.users', [
-            'users' => $users,
-            'onlineIds' => $onlineIds,
-            'levels' => $levels,
-        ]);
+        $totalUsers = $users->count();
+        $totalAdmin = $users->where('level', 'admin')->count();
+        $totalKurir = $users->where('level', 'kurir')->count();
+        $totalOnline = $users->whereIn('id', $onlineIds)->count();
+
+        if ($current->level === 'owner') {
+            return view('dashboard.owner.user', [
+                'users' => $users,
+                'onlineIds' => $onlineIds,
+                'levels' => $levels,
+                'totalUsers' => $totalUsers,
+                'totalAdmin' => $totalAdmin,
+                'totalKurir' => $totalKurir,
+                'totalOnline' => $totalOnline,
+            ]);
+        } else {
+            return view('dashboard.admin.user', [
+                'users' => $users,
+                'onlineIds' => $onlineIds,
+                'levels' => $levels,
+                'totalUsers' => $totalUsers,
+                'totalAdmin' => $totalAdmin,
+                'totalKurir' => $totalKurir,
+                'totalOnline' => $totalOnline,
+            ]);
+        }
     }
 
     public function store(Request $request)
@@ -45,6 +66,7 @@ class UsersManagementController extends Controller
             return back()->withErrors(['level' => 'Level tidak diizinkan.'])->withInput();
         }
         $user = User::create($validated);
-        return redirect()->route('dashboard.users')->with('status', 'User berhasil dibuat.');
+
+        return redirect()->route('dashboard.owner.users')->with('status', 'User berhasil dibuat.');
     }
 }

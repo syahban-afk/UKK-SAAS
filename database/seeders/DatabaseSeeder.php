@@ -17,28 +17,27 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        // Owner
-        User::create([
-            'name' => 'Owner',
-            'email' => 'owner@gmail.com',
-            'password' => Hash::make('owner123'),
-            'level' => 'owner',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'owner@gmail.com'],
+            ['name' => 'Owner', 'password' => Hash::make('owner123'), 'level' => 'owner']
+        );
 
-        // Admin
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin123'),
-            'level' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
+            ['name' => 'Admin', 'password' => Hash::make('admin123'), 'level' => 'admin']
+        );
 
-        // Kurir
-        User::create([
-            'name' => 'Kurir',
-            'email' => 'kurir@gmail.com',
-            'password' => Hash::make(value: 'kurir123'),
-            'level' => 'kurir',
+        User::firstOrCreate(
+            ['email' => 'kurir@gmail.com'],
+            ['name' => 'Kurir', 'password' => Hash::make('kurir123'), 'level' => 'kurir']
+        );
+ 
+        $this->call([
+            JenisPembayaransSeeder::class,
+            PaketsSeeder::class,
+            PelanggansSeeder::class,
+            PemesanansSeeder::class,
+            PengirimansSeeder::class,
         ]);
     }
 }

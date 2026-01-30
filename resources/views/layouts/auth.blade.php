@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <main class="page-main">
+    <main>
         @yield('content')
     </main>
 </body>
