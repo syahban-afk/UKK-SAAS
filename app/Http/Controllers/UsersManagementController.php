@@ -22,7 +22,8 @@ class UsersManagementController extends Controller
             ->unique()
             ->values()
             ->all();
-        $users = User::whereIn('level', ['admin', 'kurir'])->get();
+        $allowedLevels = $current->level === 'owner' ? ['admin', 'kurir'] : ['kurir'];
+        $users = User::whereIn('level', $allowedLevels)->get();
 
         $totalUsers = $users->count();
         $totalAdmin = $users->where('level', 'admin')->count();
@@ -66,7 +67,9 @@ class UsersManagementController extends Controller
             return back()->withErrors(['level' => 'Level tidak diizinkan.'])->withInput();
         }
         $user = User::create($validated);
-
-        return redirect()->route('dashboard.owner.users')->with('status', 'User berhasil dibuat.');
+        if ($current->level === 'owner') {
+            return redirect()->route('dashboard.owner.users')->with('status', 'User berhasil dibuat.');
+        }
+        return redirect()->route('dashboard.admin.users')->with('status', 'User berhasil dibuat.');
     }
 }

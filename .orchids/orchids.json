@@ -1,0 +1,8 @@
+{
+  "projectId": "40c7c029-8810-484c-81d2-65e8b463649a",
+  "createdAt": 1769996076700,
+  "startupCommands": [
+    "php artisan serve",
+    "npm run dev"
+  ]
+}
