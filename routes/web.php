@@ -13,9 +13,9 @@ use App\Models\pengirimans_model;
 use App\Models\User;
 use Illuminate\Support\Str;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\LandingPageController;
+
+Route::get('/', [LandingPageController::class, 'index']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -279,9 +279,12 @@ Route::middleware(['auth', 'level:kurir'])
         })->name('finish');
     });
 
+use App\Http\Controllers\CheckoutController;
+
 Route::middleware('auth:pelanggan')
     ->prefix('dashboard/pelanggan')
     ->name('dashboard.pelanggan.')
     ->group(function () {
         Route::get('/', fn() => view('dashboard.pelanggan.pelanggan'))->name('index');
+        Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout');
     });
