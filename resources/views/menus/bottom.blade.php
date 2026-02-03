@@ -1,5 +1,10 @@
 <li>
-    <a href="{{ route('dashboard.owner.index') }}" data-tip="Settings">
+    @php
+        $settingsUrl = auth('pelanggan')->check()
+            ? route('dashboard.pelanggan.settings')
+            : route('dashboard.' . auth()->user()->level . '.settings');
+    @endphp
+    <a href="{{ $settingsUrl }}" data-tip="Settings">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="icon icon-tabler icons-tabler-outline icon-tabler-settings">
@@ -15,7 +20,7 @@
 <li>
     <form method="POST" action="{{ route('logout') }}" data-tip="Logout" type="submit">
         @csrf
-        {{-- <button type="submit" class="flex items-center gap-3 w-full p-2 hover:bg-base-200 rounded-lg transition-colors"> --}}
+        <button type="submit" class="hover:bg-base-200">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
@@ -25,6 +30,6 @@
             <path d="M18 15l3 -3" />
         </svg>
         <span class="is-drawer-close:hidden">Logout</span>
-        {{-- </button> --}}
+        </button>
     </form>
 </li>

@@ -17,7 +17,7 @@
     <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex-shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center">
                     <span class="text-2xl font-bold text-orange-600">CateringPro</span>
                 </div>
                 <div class="hidden md:block">
@@ -110,7 +110,7 @@
                     <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Catering Menu</h2>
                     <p class="text-gray-600">A glimpse of our most popular packages.</p>
                 </div>
-                <a href="{{ route('login') }}" class="text-orange-600 font-semibold hover:underline">View All Menu →</a>
+                <a href="{{ url('/menu') }}" class="text-orange-600 font-semibold hover:underline">View All Menu →</a>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
                 @foreach($featuredMenus as $menu)
@@ -118,7 +118,7 @@
                     <div class="relative h-64 overflow-hidden">
                         <img src="{{ $menu->foto1 ?: 'https://images.unsplash.com/photo-1547573854-74d2a71d0826?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $menu->nama_paket }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-orange-600 font-bold">
-                            Rp {{ number_get($menu->harga_paket) }}
+                            Rp {{ number_format($menu->harga_paket, 0, ',', '.') }}
                         </div>
                     </div>
                     <div class="p-6">

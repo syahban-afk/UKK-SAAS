@@ -4,6 +4,10 @@
     @include('menus.admin')
 @endsection
 
+@section('menu-bottom')
+    @include('menus.bottom')
+@endsection
+
 @section('content')
 <div class="space-y-6">
   @php

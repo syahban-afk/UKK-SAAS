@@ -39,7 +39,7 @@ function getChartGradient(ctx) {
     const infoColorHalf = getDaisyUIColor('bg-info/50');
     const primaryColorHalf = getDaisyUIColor('bg-primary/50');
     const primaryColorFade = getDaisyUIColor('bg-primary/20');
-    const textColor = getDaisyUITextColor('text-primary-content');
+    const textColor = '#0f172a';
 
     // Buat gradient
     const gradient = ctx.createLinearGradient(0, 0, 0, 200);
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Pendapatan Bulanan',
+                    text: 'Total Pendapatan',
                     color: chartColors.PrimaryText,
                     font: {
                         size: 18
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     ticks: {
                         color: chartColors.PrimaryText,
                         callback: function (val) {
-                            return 'Rp ' + val + ' jt';
+                            return 'Rp ' + val + ' K';
                         }
                     }
                 }

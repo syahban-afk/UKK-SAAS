@@ -6,29 +6,20 @@
 
 @section('content')
     <div class="space-y-6">
-        @php
-            $pl = auth('pelanggan')->user();
-            $kategoriNow = request('kategori');
-            $pakets = \App\Models\pakets_model::when($kategoriNow, fn($q) => $q->where('kategori', $kategoriNow))
-                ->orderBy('nama_paket')
-                ->paginate(12);
-            $orders = \App\Models\pemesanans_model::with(['pengiriman'])
-                ->where('id_pelanggan', $pl->id)
-                ->orderByDesc('tgl_pesan')
-                ->paginate(10);
-            $kategoris = ['Pernikahan','Selamatan','Ulang Tahun','Studi Tour','Rapat'];
-        @endphp
+        
 
         <div class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <div>
-                <h1 class="text-2xl font-bold text-gray-900">Selamat Datang, {{ $pl->nama_pelanggan }}!</h1>
+                <h1 class="text-2xl font-bold text-gray-900">Selamat Datang, {{ $pl->nama_pelanggan ?? 'Pengunjung' }}!</h1>
                 <p class="text-gray-500">Pesan catering favorit Anda dengan mudah.</p>
             </div>
-            <button onclick="profile_modal.showModal()" class="btn btn-ghost btn-circle avatar">
-                <div class="w-12 rounded-full ring ring-orange-600 ring-offset-base-100 ring-offset-2">
-                    <img src="{{ $pl->foto ?: 'https://ui-avatars.com/api/?name='.urlencode($pl->nama_pelanggan).'&color=7F9CF5&background=EBF4FF' }}" />
-                </div>
-            </button>
+            @if(!empty($pl))
+                <button onclick="profile_modal.showModal()" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-12 rounded-full ring ring-orange-600 ring-offset-base-100 ring-offset-2">
+                        <img src="{{ $pl->foto ?: 'https://ui-avatars.com/api/?name='.urlencode($pl->nama_pelanggan).'&color=7F9CF5&background=EBF4FF' }}" />
+                    </div>
+                </button>
+            @endif
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -114,6 +105,7 @@
                     <div class="mt-8">{{ $pakets->withQueryString()->links() }}</div>
                 </div>
 
+                @if(!empty($pl))
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                     <h2 class="text-xl font-bold text-gray-900 mb-6">Riwayat Pesanan</h2>
                     <div class="overflow-x-auto">
@@ -162,6 +154,7 @@
                     </div>
                     <div class="mt-6">{{ $orders->links() }}</div>
                 </div>
+                @endif
             </div>
 
             <div class="space-y-6">
@@ -184,11 +177,16 @@
                         </div>
                         <div class="grid grid-cols-2 gap-2 pt-2">
                             <button type="button" class="btn btn-outline btn-sm" onclick="window.pelangganClearCart()">Clear</button>
-                            <a href="#checkout_section" class="btn btn-primary btn-sm">Checkout</a>
+                            @if (!empty($canCheckout))
+                                <a href="#checkout_section" class="btn btn-primary btn-sm">Checkout</a>
+                            @else
+                                <a href="{{ route('login') }}" class="btn btn-primary btn-sm">Login untuk Checkout</a>
+                            @endif
                         </div>
                     </div>
                 </div>
 
+                @if (!empty($canCheckout))
                 <div id="checkout_section" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                     <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                         <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -217,6 +215,7 @@
                         </div>
                     </form>
                 </div>
+                @endif
             </div>
         </div>
     </div>
@@ -225,7 +224,7 @@
     <dialog id="profile_modal" class="modal">
         <div class="modal-box rounded-2xl max-w-md">
             <h3 class="font-bold text-lg mb-6">Profile Settings</h3>
-            <form action="{{ route('dashboard.pelanggan.checkout') /* Using same endpoint for simplicity if needed or create new */ }}" method="POST" class="space-y-4">
+            <form action="{{ route('dashboard.pelanggan.checkout.store') }}" method="POST" class="space-y-4">
                 @csrf
                 <div class="flex justify-center mb-6">
                     <div class="avatar">
@@ -358,7 +357,7 @@
             };
 
             try {
-                const res = await fetch('{{ route("dashboard.pelanggan.checkout") }}', {
+                const res = await fetch('{{ route("dashboard.pelanggan.checkout.store") }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

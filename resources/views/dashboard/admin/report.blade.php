@@ -15,7 +15,6 @@
             $now = \Carbon\Carbon::now();
             $end = $now->copy()->endOfDay();
             $start = match ($range) {
-                'hari' => $now->copy()->startOfDay(),
                 'minggu' => $now->copy()->subDays(6)->startOfDay(),
                 'bulan' => $now->copy()->subDays(29)->startOfDay(),
                 'tahun' => $now->copy()->subDays(365)->startOfDay(),
@@ -62,7 +61,6 @@
                 <form method="GET" class="flex gap-2">
                     @php $rangeNow = request('range', 'bulan'); @endphp
                     <select name="range" class="select select-bordered select-sm">
-                        <option value="hari" {{ $rangeNow === 'hari' ? 'selected' : '' }}>Hari ini</option>
                         <option value="minggu" {{ $rangeNow === 'minggu' ? 'selected' : '' }}>1 Minggu</option>
                         <option value="bulan" {{ $rangeNow === 'bulan' ? 'selected' : '' }}>1 Bulan</option>
                         <option value="tahun" {{ $rangeNow === 'tahun' ? 'selected' : '' }}>1 Tahun</option>
