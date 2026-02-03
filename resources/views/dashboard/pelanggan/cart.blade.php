@@ -4,6 +4,10 @@
     @include('menus.pelanggan')
 @endsection
 
+@section('menu-bottom')
+    @include('menus.bottom')
+@endsection
+
 @section('content')
     <div class="space-y-6">
         <div class="card bg-base-100 border border-base-300">

@@ -1,103 +1,134 @@
-<!DOCTYPE html>
-<html lang="id" data-theme="light">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Menu Catering</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-base-200">
-    <nav class="navbar w-full bg-base-100 border border-base-300">
-        <div class="navbar-start">
-            <a href="{{ url('/') }}" class="btn btn-ghost text-xl">CateringPro</a>
-        </div>
-        <div class="navbar-end">
-            @auth('pelanggan')
-                <a href="{{ route('dashboard.pelanggan.index') }}" class="btn btn-primary">Dashboard</a>
-            @else
-                <a href="{{ route('login') }}" class="btn">Login</a>
-            @endauth
-        </div>
-    </nav>
+@extends('layouts.public')
 
-    <main class="max-w-7xl mx-auto p-4">
+@section('content')
+    <main class="max-w-7xl mx-auto p-4 pt-20">
         <div class="space-y-6">
-            @php
-                $kategoriNow = request('kategori');
-                $pakets = \App\Models\pakets_model::when($kategoriNow, fn($q) => $q->where('kategori', $kategoriNow))
-                    ->orderBy('nama_paket')
-                    ->paginate(12);
-                $kategoris = ['Pernikahan','Selamatan','Ulang Tahun','Studi Tour','Rapat'];
-            @endphp
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div class="flex items-center justify-between">
+
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+                {{-- Header --}}
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <h2 class="text-xl font-bold text-gray-900">Daftar Menu</h2>
-                    <form method="GET" class="flex gap-2">
-                        <select name="kategori" class="select select-bordered select-sm">
-                            <option value="">Semua Kategori</option>
-                            @foreach ($kategoris as $kat)
-                                <option value="{{ $kat }}" {{ $kategoriNow === $kat ? 'selected' : '' }}>{{ $kat }}</option>
-                            @endforeach
-                        </select>
-                        <button class="btn btn-sm btn-primary" type="submit">Filter</button>
+
+                    {{-- Search + Filter --}}
+                    <form method="GET" class="flex flex-wrap gap-2 text-white">
+                        <div class="join">
+                            <input type="text" name="search" value="{{ $search }}"
+                                placeholder="Cari paket / jenis..." class="input input-bordered input-sm join-item w-52 bg-orange-600" />
+                            <select name="kategori" class="select select-bordered select-sm join-item bg-orange-600">
+                                <option value="">Semua Kategori</option>
+                                @foreach ($kategoris as $kat)
+                                    <option value="{{ $kat }}" {{ $kategoriNow === $kat ? 'selected' : '' }}>
+                                        {{ $kat }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <button class="btn btn-sm join-item bg-orange-600 hover:bg-orange-700" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                    <path d="M21 21l-6 -6" />
+                                </svg>
+                            </button>
+                        </div>
                     </form>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+
+                {{-- Grid --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
                     @forelse ($pakets as $p)
-                        <div class="group bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-md transition">
-                            <div class="relative h-40 overflow-hidden">
-                                <img src="{{ $p->foto1 }}" alt="{{ $p->nama_paket }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-                                <div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold text-orange-600">
+                        <div
+                            class="group bg-white rounded-2xl overflow-hidden border border-gray-100
+                               hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+
+                            {{-- Image --}}
+                            <div class="relative h-44 overflow-hidden">
+                                <img src="{{ $p->foto1 }}" alt="{{ $p->nama_paket }}"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+
+                                <div
+                                    class="absolute top-3 right-3 bg-orange-500 text-white
+                                       px-3 py-1 rounded-full text-xs font-bold shadow">
                                     Rp {{ number_format($p->harga_paket, 0, ',', '.') }}
                                 </div>
                             </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-gray-900 truncate">{{ $p->nama_paket }}</h3>
-                                <p class="text-xs text-gray-500 mb-4">{{ $p->jenis }} • {{ $p->kategori }}</p>
-                                <div class="grid grid-cols-2 gap-2">
-                                    <button type="button" class="btn btn-outline btn-xs" onclick="detail_{{ $p->id }}.showModal()">Detail</button>
-                                    <button type="button" class="btn btn-primary btn-xs"
-                                        data-id="{{ $p->id }}"
-                                        data-nama="{{ $p->nama_paket }}"
-                                        data-harga="{{ $p->harga_paket }}"
-                                        onclick="window.pelangganAddToCart(this)">
-                                        Tambah ke Keranjang
+
+                            {{-- Content --}}
+                            <div class="p-4 space-y-2">
+                                <h3 class="font-bold text-gray-900 truncate">
+                                    {{ $p->nama_paket }}
+                                </h3>
+
+                                <p class="text-xs text-gray-500">
+                                    {{ $p->jenis }} • {{ $p->kategori }}
+                                </p>
+
+                                <div class="grid grid-cols-2 gap-2 pt-2">
+                                    <button type="button" class="btn btn-outline btn-xs"
+                                        onclick="detail_{{ $p->id }}.showModal()">
+                                        Detail
+                                    </button>
+
+                                    <button type="button" class="btn btn-primary btn-xs hover:scale-[1.03] transition"
+                                        data-id="{{ $p->id }}" data-nama="{{ $p->nama_paket }}"
+                                        data-harga="{{ $p->harga_paket }}" onclick="window.pelangganAddToCart(this)">
+                                        + Keranjang
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <dialog id="detail_{{ $p->id }}" class="modal">
-                            <div class="modal-box max-w-2xl rounded-2xl p-0 overflow-hidden">
+                        {{-- Modal Detail --}}
+                        <dialog id="detail_{{ $p->id }}" class="modal modal-bottom sm:modal-middle">
+                            <div class="modal-box max-w-2xl rounded-3xl p-0 overflow-hidden bg-white">
                                 <div class="relative h-64">
                                     <img src="{{ $p->foto1 }}" class="w-full h-full object-cover" alt="">
-                                    <button type="button" class="absolute top-4 right-4 btn btn-sm btn-circle btn-ghost bg-black/20 text-white" onclick="detail_{{ $p->id }}.close()">✕</button>
+                                    <button
+                                        class="absolute top-4 right-4 btn btn-sm btn-circle btn-ghost bg-black/30 text-white"
+                                        onclick="detail_{{ $p->id }}.close()">✕</button>
                                 </div>
+
                                 <div class="p-8">
                                     <div class="flex justify-between items-start mb-4">
                                         <div>
-                                            <h3 class="text-2xl font-bold text-gray-900">{{ $p->nama_paket }}</h3>
-                                            <div class="flex gap-2 mt-1">
-                                                <span class="badge badge-orange-100 text-orange-600 border-none">{{ $p->kategori }}</span>
-                                                <span class="badge badge-gray-100 text-gray-600 border-none">{{ $p->jenis }}</span>
+                                            <h3 class="text-2xl font-bold text-gray-900">
+                                                {{ $p->nama_paket }}
+                                            </h3>
+                                            <div class="flex gap-2 mt-2">
+                                                <span class="badge bg-orange-100 text-orange-600 border-none">
+                                                    {{ $p->kategori }}
+                                                </span>
+                                                <span class="badge bg-gray-100 text-gray-600 border-none">
+                                                    {{ $p->jenis }}
+                                                </span>
                                             </div>
                                         </div>
-                                        <div class="text-2xl font-bold text-orange-600">Rp {{ number_format($p->harga_paket, 0, ',', '.') }}</div>
+
+                                        <div class="text-2xl font-bold text-orange-600">
+                                            Rp {{ number_format($p->harga_paket, 0, ',', '.') }}
+                                        </div>
                                     </div>
+
                                     <div class="grid grid-cols-3 gap-4 mb-6">
-                                        <img src="{{ $p->foto1 }}" class="h-24 w-full object-cover rounded-xl" alt="">
-                                        <img src="{{ $p->foto2 }}" class="h-24 w-full object-cover rounded-xl" alt="">
-                                        <img src="{{ $p->foto3 }}" class="h-24 w-full object-cover rounded-xl" alt="">
+                                        <img src="{{ $p->foto1 }}" class="h-24 w-full object-cover rounded-xl">
+                                        <img src="{{ $p->foto2 }}" class="h-24 w-full object-cover rounded-xl">
+                                        <img src="{{ $p->foto3 }}" class="h-24 w-full object-cover rounded-xl">
                                     </div>
-                                    <div class="prose prose-sm max-w-none text-gray-600 mb-8">
+
+                                    <div class="text-gray-600 text-sm space-y-2 mb-6">
                                         <p>{{ $p->deskripsi }}</p>
-                                        <p class="font-semibold text-gray-900 mt-4">Porsi: {{ $p->jumlah_pax }} Pax</p>
+                                        <p class="font-semibold text-gray-900">
+                                            Porsi: {{ $p->jumlah_pax }} Pax
+                                        </p>
                                     </div>
-                                    <button type="button" class="btn btn-primary w-full"
-                                        data-id="{{ $p->id }}"
-                                        data-nama="{{ $p->nama_paket }}"
-                                        data-harga="{{ $p->harga_paket }}"
+
+                                    <button class="btn btn-primary w-full" data-id="{{ $p->id }}"
+                                        data-nama="{{ $p->nama_paket }}" data-harga="{{ $p->harga_paket }}"
                                         onclick="window.pelangganAddToCart(this); detail_{{ $p->id }}.close()">
                                         Tambah ke Keranjang
                                     </button>
@@ -105,41 +136,61 @@
                             </div>
                         </dialog>
                     @empty
-                        <div class="col-span-full text-center py-12 text-gray-500">Tidak ada menu ditemukan</div>
+                        <div class="col-span-full text-center py-16 text-gray-500">
+                            Tidak ada menu ditemukan
+                        </div>
                     @endforelse
                 </div>
-                <div class="mt-8">{{ $pakets->withQueryString()->links() }}</div>
+
+                {{-- Pagination --}}
+                <div class="mt-8">
+                    {{ $pakets->links() }}
+                </div>
             </div>
         </div>
     </main>
+@endsection
 
-    <footer class="footer footer-center bg-base-100 border border-base-300 text-base-content p-4">
-        <aside>
-            <p>© {{ date('Y') }} CateringPro</p>
-        </aside>
-    </footer>
+<script>
+    const getCart = () => {
+        try {
+            return JSON.parse(localStorage.getItem('pelanggan_cart') || '[]');
+        } catch {
+            return [];
+        }
+    };
 
-    <script>
-        const getCart = () => {
-            try { return JSON.parse(localStorage.getItem('pelanggan_cart') || '[]'); } catch { return []; }
-        };
-        const setCart = (arr) => {
-            localStorage.setItem('pelanggan_cart', JSON.stringify(arr));
-        };
-        window.pelangganAddToCart = (btn) => {
-            const id = parseInt(btn.dataset.id, 10);
-            const nama = btn.dataset.nama;
-            const harga = parseInt(btn.dataset.harga, 10);
-            const cart = getCart();
-            const idx = cart.findIndex(i => i.id === id);
-            if (idx >= 0) { cart[idx].qty += 1; } else { cart.push({ id, nama, harga, qty: 1 }); }
-            setCart(cart);
-            const toast = document.createElement('div');
-            toast.className = 'fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg z-[100]';
-            toast.textContent = 'Ditambahkan ke keranjang!';
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2000);
-        };
-    </script>
-</body>
-</html>
+    const setCart = (arr) => {
+        localStorage.setItem('pelanggan_cart', JSON.stringify(arr));
+    };
+
+    window.pelangganAddToCart = (btn) => {
+        const id = parseInt(btn.dataset.id);
+        const nama = btn.dataset.nama;
+        const harga = parseInt(btn.dataset.harga);
+
+        const cart = getCart();
+        const idx = cart.findIndex(i => i.id === id);
+
+        if (idx >= 0) {
+            cart[idx].qty += 1;
+        } else {
+            cart.push({
+                id,
+                nama,
+                harga,
+                qty: 1
+            });
+        }
+
+        setCart(cart);
+
+        const toast = document.createElement('div');
+        toast.className =
+            'fixed bottom-4 right-4 bg-black/80 backdrop-blur text-white px-6 py-3 rounded-xl shadow-lg z-[100]';
+        toast.textContent = 'Ditambahkan ke keranjang!';
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.remove(), 2000);
+    };
+</script>

@@ -28,4 +28,38 @@ class LandingPageController extends Controller
             'resi' => $resi,
         ]);
     }
+
+    public function menu(Request $request)
+    {
+        $kategoriNow = $request->query('kategori');
+        $search = $request->query('search');
+        $pakets = pakets_model::query()
+            ->when($kategoriNow, fn($q) => $q->where('kategori', $kategoriNow))
+            ->when($search, fn($q) => $q->where(function($qq) use ($search) {
+                $qq->where('nama_paket', 'like', "%{$search}%")
+                   ->orWhere('jenis', 'like', "%{$search}%");
+            }))
+            ->orderBy('nama_paket')
+            ->paginate(12)
+            ->withQueryString();
+        $kategoris = ['Pernikahan', 'Selamatan', 'Ulang Tahun', 'Studi Tour', 'Rapat'];
+        return view('menu', [
+            'pakets' => $pakets,
+            'kategoris' => $kategoris,
+            'kategoriNow' => $kategoriNow,
+            'search' => $search,
+        ]);
+    }
+
+    public function info()
+    {
+        $totalMenu = pakets_model::count();
+        $totalPesanan = pemesanans_model::count();
+        $totalKurir = \App\Models\User::where('level','kurir')->count();
+        return view('dashboard.pelanggan.info', [
+            'totalMenu' => $totalMenu,
+            'totalPesanan' => $totalPesanan,
+            'totalKurir' => $totalKurir,
+        ]);
+    }
 }

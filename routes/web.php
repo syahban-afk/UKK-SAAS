@@ -4,16 +4,19 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsersManagementController;
 use App\Models\pakets_model;
-use App\Models\User;
 use App\Models\pemesanans_model;
 use App\Models\pengirimans_model;
 
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\PelangganDashboardController;
 
 Route::get('/', [LandingPageController::class, 'index']);
+Route::get('/menu', [LandingPageController::class, 'menu'])->name('menu.public');
+Route::get('/info', [LandingPageController::class, 'info'])->name('info.public');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -107,7 +110,7 @@ Route::middleware(['auth', 'level:owner'])
             $user = Auth::user();
             $validated = $request->validate([
                 'name' => ['required', 'string', 'max:30'],
-                'email' => ['required', 'string', 'email', 'max:255', \Illuminate\Validation\Rule::unique('users', 'email')->ignore($user->id)],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
             ]);
             $user->update($validated);
             return back()->with('status', 'Profil diperbarui.');
@@ -271,7 +274,7 @@ Route::middleware(['auth', 'level:admin'])
             $user = Auth::user();
             $validated = $request->validate([
                 'name' => ['required', 'string', 'max:30'],
-                'email' => ['required', 'string', 'email', 'max:255', \Illuminate\Validation\Rule::unique('users', 'email')->ignore($user->id)],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
             ]);
             $user->update($validated);
             return back()->with('status', 'Profil diperbarui.');
@@ -358,7 +361,7 @@ Route::middleware(['auth', 'level:kurir'])
             $user = Auth::user();
             $validated = $request->validate([
                 'name' => ['required', 'string', 'max:30'],
-                'email' => ['required', 'string', 'email', 'max:255', \Illuminate\Validation\Rule::unique('users', 'email')->ignore($user->id)],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
             ]);
             $user->update($validated);
             return back()->with('status', 'Profil diperbarui.');
@@ -395,13 +398,10 @@ Route::middleware('auth:pelanggan')
     ->prefix('dashboard/pelanggan')
     ->name('dashboard.pelanggan.')
     ->group(function () {
-        Route::get('/', fn() => view('dashboard.pelanggan.pelanggan'))->name('index');
-        Route::get('/menu', fn() => view('dashboard.pelanggan.menu'))->name('menu');
+        Route::get('/', [PelangganDashboardController::class, 'index'])->name('index');
         Route::get('/cart', fn() => view('dashboard.pelanggan.cart'))->name('cart');
         Route::get('/checkout', fn() => view('dashboard.pelanggan.checkout'))->name('checkout');
         Route::get('/status', fn() => view('dashboard.pelanggan.status'))->name('status');
-        Route::get('/info', fn() => view('dashboard.pelanggan.info'))->name('info');
-        Route::get('/promo', fn() => view('dashboard.pelanggan.promo'))->name('promo');
         Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
         Route::get('/settings', fn() => view('dashboard.pelanggan.settings'))->name('settings');
@@ -410,7 +410,7 @@ Route::middleware('auth:pelanggan')
             $pl = auth('pelanggan')->user();
             $validated = $request->validate([
                 'nama_pelanggan' => ['required', 'string', 'max:100'],
-                'email' => ['required', 'string', 'email', 'max:255', \Illuminate\Validation\Rule::unique('pelanggans', 'email')->ignore($pl->id)],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('pelanggans', 'email')->ignore($pl->id)],
                 'telepon' => ['required', 'string', 'max:15'],
                 'alamat1' => ['nullable', 'string', 'max:255'],
                 'alamat2' => ['nullable', 'string', 'max:255'],
