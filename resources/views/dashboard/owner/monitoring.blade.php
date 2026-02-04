@@ -24,7 +24,7 @@
                             <option value="{{ $st }}" {{ $currentStatus === $st ? 'selected' : '' }}>{{ $st }}</option>
                         @endforeach
                     </select>
-                    <button class="btn btn-sm btn-primary" type="submit">Filter</button>
+                    <button class="btn btn-sm bg-orange-600 hover:bg-orange-700 text-white" type="submit">Filter</button>
                 </form>
             </div>
         </div>
@@ -164,10 +164,11 @@
                         </tbody>
                     </table>
                 </div>
-
+                
                 <div class="mt-4">
                     {{ $orders->withQueryString()->links() }}
                 </div>
+
             </div>
         </div>
     </div>

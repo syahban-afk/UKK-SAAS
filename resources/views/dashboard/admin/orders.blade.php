@@ -20,7 +20,7 @@
                         <option value="{{ $st }}" {{ $statusNow === $st ? 'selected' : '' }}>{{ $st }}</option>
                     @endforeach
                 </select>
-                <button class="btn btn-sm btn-primary" type="submit">Filter</button>
+                <button class="btn btn-sm bg-orange-600 hover:bg-orange-700" type="submit">Filter</button>
             </form>
         </div>
 

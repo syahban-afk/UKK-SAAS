@@ -12,7 +12,7 @@
     <div class="space-y-6">
         <div class="flex items-center justify-between">
             <h1 class="text-2xl font-bold">Manajemen Kurir</h1>
-            <button class="btn btn-primary btn-sm" onclick="create_courier_modal.showModal()">+ Tambah Kurir</button>
+            <button class="btn bg-orange-600 hover:bg-orange-700 text-white btn-sm" onclick="create_courier_modal.showModal()">+ Tambah Kurir</button>
         </div>
 
         @php
@@ -106,7 +106,7 @@
                 <input type="hidden" name="level" value="kurir">
                 <div class="modal-action">
                     <button type="button" class="btn btn-ghost" onclick="create_courier_modal.close()">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn bg-orange-600 hover:bg-orange-700 text-white">Simpan</button>
                 </div>
             </form>
         </div>

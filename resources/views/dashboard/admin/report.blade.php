@@ -66,7 +66,7 @@
                         <option value="tahun" {{ $rangeNow === 'tahun' ? 'selected' : '' }}>1 Tahun</option>
                     </select>
                     <button class="btn btn-sm btn-outline" type="submit">Terapkan</button>
-                    <a class="btn btn-sm btn-primary"
+                    <a class="btn btn-sm bg-orange-600 hover:bg-orange-700"
                        href="{{ route('dashboard.admin.report.export', ['range' => $rangeNow]) }}">
                         Export CSV
                     </a>

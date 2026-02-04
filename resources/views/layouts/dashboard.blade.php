@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id" data-theme="bumblebee">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? config('app.name') }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -40,8 +45,13 @@
                     <div class="dropdown dropdown-end">
                         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                             <div class="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                @if (auth('pelanggan')->check())
+                                    <img alt="Tailwind CSS Navbar component"
+                                        src="{{ auth('pelanggan')->user()->foto ?: 'https://ui-avatars.com/api/?name=' . urlencode(auth('pelanggan')->user()->nama_pelanggan) . '&color=7F9CF5&background=EBF4FF' }}" />
+                                @else
+                                    <img alt="Tailwind CSS Navbar component"
+                                        src="{{ auth('web')->user()->foto ?: 'https://ui-avatars.com/api/?name=' . urlencode(auth('web')->user()->name) . '&color=7F9CF5&background=EBF4FF' }}" />
+                                @endif
                             </div>
                         </div>
                         <ul tabindex="-1"

@@ -50,16 +50,4 @@ class LandingPageController extends Controller
             'search' => $search,
         ]);
     }
-
-    public function info()
-    {
-        $totalMenu = pakets_model::count();
-        $totalPesanan = pemesanans_model::count();
-        $totalKurir = \App\Models\User::where('level','kurir')->count();
-        return view('dashboard.pelanggan.info', [
-            'totalMenu' => $totalMenu,
-            'totalPesanan' => $totalPesanan,
-            'totalKurir' => $totalKurir,
-        ]);
-    }
 }

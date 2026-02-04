@@ -79,7 +79,7 @@
                     <option value="Sedang Dikirim" {{ $stNow === 'Sedang Dikirim' ? 'selected' : '' }}>Sedang Dikirim</option>
                     <option value="Tiba Ditujuan" {{ $stNow === 'Tiba Ditujuan' ? 'selected' : '' }}>Tiba Ditujuan</option>
                 </select>
-                <button class="btn btn-sm btn-primary" type="submit">Filter</button>
+                <button class="btn btn-sm bg-orange-600 hover:bg-orange-700" type="submit">Filter</button>
             </form>
         </div>
 
@@ -127,7 +127,7 @@
                                         <form method="POST" action="{{ route('dashboard.kurir.pick') }}">
                                             @csrf
                                             <input type="hidden" name="id_pesan" value="{{ $pem->id }}">
-                                            <button type="submit" class="btn btn-primary btn-xs">Ambil</button>
+                                            <button type="submit" class="btn bg-orange-600 hover:bg-orange-700 text-white btn-xs">Ambil</button>
                                         </form>
                                     @endif
                                     @if ($as->status_kirim === 'Sedang Dikirim')
@@ -213,7 +213,7 @@
             </div>
         </div>
         <div class="modal-action">
-            <button type="button" class="btn btn-primary" onclick="profile_modal.close()">Tutup</button>
+            <button type="button" class="btn bg-orange-600 hover:bg-orange-700 text-white" onclick="profile_modal.close()">Tutup</button>
         </div>
     </div>
 </dialog>

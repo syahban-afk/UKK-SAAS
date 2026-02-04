@@ -70,7 +70,7 @@
                                     <p class="text-xs text-gray-500 mb-4">{{ $p->jenis }} • {{ $p->kategori }}</p>
                                     <div class="grid grid-cols-2 gap-2">
                                         <a href="{{ route('menu.public') }}?search={{ urlencode($p->nama_paket) }}" class="btn btn-outline btn-xs">Lihat</a>
-                                        <a href="{{ route('menu.public') }}" class="btn btn-primary btn-xs">Menu</a>
+                                        <a href="{{ route('menu.public') }}" class="btn bg-orange-600 hover:bg-orange-700 text-white btn-xs">Menu</a>
                                     </div>
                                 </div>
                             </div>

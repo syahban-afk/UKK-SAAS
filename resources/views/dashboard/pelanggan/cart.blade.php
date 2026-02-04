@@ -31,7 +31,7 @@
                     <div class="text-lg font-bold">Total: <span id="cartGrandTotal">Rp 0</span></div>
                     <div class="flex gap-2">
                         <button type="button" class="btn btn-outline btn-sm" onclick="window.pelangganClearCart()">Kosongkan</button>
-                        <a href="{{ route('dashboard.pelanggan.checkout') }}" class="btn btn-primary btn-sm">Checkout</a>
+                        <a href="{{ route('dashboard.pelanggan.checkout') }}" class="btn bg-orange-600 hover:bg-orange-700 text-white btn-sm">Checkout</a>
                     </div>
                 </div>
             </div>

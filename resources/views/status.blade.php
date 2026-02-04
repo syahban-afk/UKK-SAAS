@@ -6,7 +6,7 @@
             <h1 class="text-2xl font-bold text-gray-900 mb-4">Cek Status Pesanan</h1>
             <form method="GET" action="{{ url('/status') }}" class="flex gap-2">
                 <input type="text" name="resi" value="{{ $resi }}" class="input input-bordered flex-1" placeholder="Masukkan No Resi" required>
-                <button class="btn btn-primary" type="submit">Cari</button>
+                <button class="btn bg-orange-600 hover:bg-orange-700 text-white" type="submit">Cari</button>
             </form>
         </div>
 

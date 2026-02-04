@@ -104,7 +104,7 @@
         <div class="flex items-center justify-between">
             <h1 class="text-2xl font-bold">Manajemen User</h1>
 
-            <button class="btn btn-primary btn-sm text-lg font-medium text-base-content"
+            <button class="btn bg-orange-600 hover:bg-orange-700 text-white btn-sm text-lg font-medium text-base-content text-white"
                 onclick="create_user_modal.showModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -118,7 +118,7 @@
                 Tambah User
             </button>
         </div>
-        
+
         <!-- LIST USER -->
         <div class="card bg-base-100 border border-base-300">
             <div class="card-body">
@@ -245,7 +245,7 @@
                     <button type="button" class="btn btn-outline" onclick="create_user_modal.close()">
                         Batal
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn bg-orange-600 hover:bg-orange-700 text-white text-white">
                         Simpan User
                     </button>
                 </div>

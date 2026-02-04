@@ -12,7 +12,7 @@
     <div class="space-y-6">
         <div class="flex items-center justify-between">
             <h1 class="text-2xl font-bold">Manajemen Menu</h1>
-            <button class="btn btn-primary btn-sm" onclick="create_menu_modal.showModal()">+ Tambah Menu</button>
+            <button class="btn bg-orange-600 hover:bg-orange-700 text-white btn-sm" onclick="create_menu_modal.showModal()">+ Tambah Menu</button>
         </div>
 
         @php
@@ -116,7 +116,7 @@
                                             </div>
                                             <div class="modal-action">
                                                 <button type="button" class="btn" onclick="edit_{{ $p->id }}.close()">Batal</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                <button type="submit" class="btn bg-orange-600 hover:bg-orange-700 text-white">Simpan</button>
                                             </div>
                                         </form>
                                     </div>
@@ -187,7 +187,7 @@
                 </div>
                 <div class="modal-action">
                     <button type="button" class="btn" onclick="create_menu_modal.close()">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn bg-orange-600 hover:bg-orange-700 text-white">Simpan</button>
                 </div>
             </form>
         </div>
