@@ -18,20 +18,20 @@
             <!-- Total Pesanan -->
             <div class="card bg-base-100 border border-base-300">
                 <div class="card-body">
-                    <div class="flex items-center gap-3">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4">
                         <div class="rounded-lg bg-primary/10 p-3 text-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M3 21h18" />
-                                <path d="M3 7h18" />
-                                <path d="M5 7v14" />
-                                <path d="M19 7v14" />
-                                <path d="M8 7v14" />
-                                <path d="M16 7v14" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 17h-11v-14h-2" />
+                                <path d="M6 5l14 1l-1 7h-13" />
                             </svg>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Total Pesanan</p>
+                            <p class="text-sm text-base-content/70">Total Pesanan</p>
                             <h2 class="text-3xl font-bold">1.245</h2>
                         </div>
                     </div>
@@ -41,16 +41,18 @@
             <!-- Pendapatan -->
             <div class="card bg-base-100 border border-base-300">
                 <div class="card-body">
-                    <div class="flex items-center gap-3">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4">
                         <div class="rounded-lg bg-success/10 p-3 text-success">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M12 1v22" />
-                                <path d="M17 5h-7a4 4 0 0 0 0 8h4a4 4 0 0 1 0 8h-7" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-currency-dollar">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />
+                                <path d="M12 3v3m0 12v3" />
                             </svg>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Pendapatan</p>
+                            <p class="text-sm text-base-content/70">Pendapatan</p>
                             <h2 class="text-3xl font-bold">Rp 125 JT</h2>
                         </div>
                     </div>
@@ -60,16 +62,18 @@
             <!-- Pesanan Aktif -->
             <div class="card bg-base-100 border border-base-300">
                 <div class="card-body">
-                    <div class="flex items-center gap-3">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4">
                         <div class="rounded-lg bg-warning/10 p-3 text-warning">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="9" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
                                 <path d="M12 7v5l3 3" />
                             </svg>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Pesanan Aktif</p>
+                            <p class="text-sm text-base-content/70">Pesanan Aktif</p>
                             <h2 class="text-3xl font-bold">42</h2>
                         </div>
                     </div>
@@ -79,16 +83,17 @@
             <!-- Paket Terlaris -->
             <div class="card bg-base-100 border border-base-300">
                 <div class="card-body">
-                    <div class="flex items-center gap-3">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4">
                         <div class="rounded-lg bg-info/10 p-3 text-info">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path
-                                    d="M12 17.75l-6.172 3.245 1.179-6.873L2 9.755l6.914-1.004L12 2.5l3.086 6.251L22 9.755l-4.997 4.367 1.179 6.873z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-star">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M12 17.75l-6.172 3.245l1.179-6.873L2 9.755l6.914-1.004L12 2.5l3.086 6.251L22 9.755l-4.997 4.367 1.179 6.873z" />
                             </svg>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Paket Terlaris</p>
+                            <p class="text-sm text-base-content/70">Paket Terlaris</p>
                             <h2 class="text-xl font-semibold">Pernikahan</h2>
                         </div>
                     </div>
@@ -98,18 +103,20 @@
             <!-- Pelanggan -->
             <div class="card bg-base-100 border border-base-300">
                 <div class="card-body">
-                    <div class="flex items-center gap-3">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4">
                         <div class="rounded-lg bg-secondary/10 p-3 text-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M7 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
-                                <path d="M17 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
-                                <path d="M3 21v-2a4 4 0 0 1 4-4h3" />
-                                <path d="M14 17h3a4 4 0 0 1 4 4v2" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
                             </svg>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500">Pelanggan</p>
+                            <p class="text-sm text-base-content/70">Pelanggan</p>
                             <h2 class="text-3xl font-bold">320</h2>
                         </div>
                     </div>
@@ -176,6 +183,7 @@
                                             'Menunggu Konfirmasi' => 'badge-warning',
                                             'Sedang Diproses' => 'badge-info',
                                             'Menunggu Kurir' => 'badge-secondary',
+                                            'Selesai' => 'badge-success',
                                             default => 'badge-ghost',
                                         };
                                         $firstPackage = $order->detailPemesanans->first()?->paket?->nama_paket ?? '-';
@@ -273,7 +281,7 @@
             (int) ($ordersStatus['Menunggu Konfirmasi'] ?? 0),
             (int) ($ordersStatus['Sedang Diproses'] ?? 0),
             (int) ($ordersStatus['Menunggu Kurir'] ?? 0),
-            (int) $doneCount,
+            (int) ($ordersStatus['Selesai'] ?? 0),
         ];
         $start365 = $now->copy()->subDays(365)->startOfDay();
         $topYear = \Illuminate\Support\Facades\DB::table('detail_pemesanans')

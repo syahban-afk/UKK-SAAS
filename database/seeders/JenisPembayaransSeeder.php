@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\jenis_pembayarans_model;
+use Illuminate\Database\Seeder;
 
 class JenisPembayaransSeeder extends Seeder
 {

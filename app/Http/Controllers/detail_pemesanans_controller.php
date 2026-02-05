@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\detail_pemesanans_model;
+use Illuminate\Http\Request;
 
 class detail_pemesanans_controller extends Controller
 {
     public function index(Request $request)
     {
         $perPage = (int) ($request->query('per_page', 15));
+
         return response()->json(detail_pemesanans_model::with(['pemesanan', 'paket'])->paginate($perPage));
     }
 
@@ -21,12 +22,14 @@ class detail_pemesanans_controller extends Controller
             'subtotal' => ['required', 'integer', 'min:0'],
         ]);
         $detail = detail_pemesanans_model::create($validated);
+
         return response()->json($detail->load(['pemesanan', 'paket']), 201);
     }
 
     public function show(string $id)
     {
         $detail = detail_pemesanans_model::with(['pemesanan', 'paket'])->findOrFail($id);
+
         return response()->json($detail);
     }
 
@@ -39,6 +42,7 @@ class detail_pemesanans_controller extends Controller
             'subtotal' => ['sometimes', 'integer', 'min:0'],
         ]);
         $detail->update($validated);
+
         return response()->json($detail->load(['pemesanan', 'paket']));
     }
 
@@ -46,6 +50,7 @@ class detail_pemesanans_controller extends Controller
     {
         $detail = detail_pemesanans_model::findOrFail($id);
         $detail->delete();
+
         return response()->json(null, 204);
     }
 }

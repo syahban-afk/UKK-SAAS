@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\detail_pemesanans_model;
-use App\Models\pemesanans_model;
-use App\Models\pakets_model;
 use App\Models\jenis_pembayarans_model;
+use App\Models\pakets_model;
 use App\Models\pelanggans_model as Pelanggan;
+use App\Models\pemesanans_model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +18,7 @@ class CheckoutController extends Controller
     {
         $pelanggan = Auth::guard('pelanggan')->user();
         $paymentMethods = jenis_pembayarans_model::with('detailJenisPembayarans')->get();
+
         return view('dashboard.pelanggan.checkout', [
             'pl' => $pelanggan,
             'paymentMethods' => $paymentMethods,
@@ -90,7 +91,7 @@ class CheckoutController extends Controller
             $pemesanan = pemesanans_model::create([
                 'id_pelanggan' => $pelanggan->id,
                 'id_jenis_bayar' => $isJsonFlow ? $request->integer('payment_id') : 1,
-                'no_resi' => 'RES' . strtoupper(Str::random(10)),
+                'no_resi' => 'RES'.strtoupper(Str::random(10)),
                 'tgl_pesan' => now(),
                 'status_pesan' => 'Menunggu Konfirmasi',
                 'total_bayar' => $totalBayar,
@@ -104,7 +105,7 @@ class CheckoutController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Pesanan berhasil dibuat!',
-                'no_resi' => $pemesanan->no_resi
+                'no_resi' => $pemesanan->no_resi,
             ]);
         });
     }

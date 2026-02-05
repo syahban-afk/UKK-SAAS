@@ -104,7 +104,7 @@
         <div class="flex items-center justify-between">
             <h1 class="text-2xl font-bold">Manajemen User</h1>
 
-            <button class="btn bg-orange-600 hover:bg-orange-700 text-white btn-sm text-lg font-medium text-base-content text-white"
+            <button class="btn bg-orange-600 hover:bg-orange-700 btn-sm text-lg font-medium text-base-content text-white"
                 onclick="create_user_modal.showModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

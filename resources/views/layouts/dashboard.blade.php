@@ -47,7 +47,7 @@
                             <div class="w-10 rounded-full">
                                 @if (auth('pelanggan')->check())
                                     <img alt="Tailwind CSS Navbar component"
-                                        src="{{ auth('pelanggan')->user()->foto ?: 'https://ui-avatars.com/api/?name=' . urlencode(auth('pelanggan')->user()->nama_pelanggan) . '&color=7F9CF5&background=EBF4FF' }}" />
+                                        src="{{ auth('pelanggan')->user()->foto ? asset('storage/' . auth('pelanggan')->user()->foto) : 'https://ui-avatars.com/api/?name=' . urlencode(auth('pelanggan')->user()->nama_pelanggan) . '&color=7F9CF5&background=EBF4FF' }}" />
                                 @else
                                     <img alt="Tailwind CSS Navbar component"
                                         src="{{ auth('web')->user()->foto ?: 'https://ui-avatars.com/api/?name=' . urlencode(auth('web')->user()->name) . '&color=7F9CF5&background=EBF4FF' }}" />

@@ -13,6 +13,78 @@
 
     <div class="space-y-6">
 
+        {{-- PROFILE PICTURE --}}
+        <div class="card bg-base-100 border border-base-300 shadow-lg">
+            <div class="card-body">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="rounded-lg bg-info/10 p-3 text-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="card-title">Profile Picture</h2>
+                        <p class="text-sm text-base-content/70">Ubah foto profil Anda</p>
+                    </div>
+                </div>
+
+                <form method="POST" action="{{ route('dashboard.pelanggan.settings.avatar') }}" enctype="multipart/form-data" class="space-y-4">
+                    @csrf
+                    <div class="flex flex-col items-center space-y-4">
+                        <!-- Current Avatar -->
+                        <div class="avatar">
+                            <div class="w-32 h-32 rounded-full ring-4 ring-orange-600 ring-offset-base-100 ring-offset-2 overflow-hidden">
+                                @if ($pl->foto)
+                                    <img src="{{ asset('storage/' . $pl->foto) }}" alt="Profile Picture" class="w-full h-full object-cover">
+                                @else
+                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($pl->nama_pelanggan) }}&color=7F9CF5&background=EBF4FF" alt="Profile Picture" class="w-full h-full object-cover">
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Upload Input -->
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                                <span class="label-text font-medium">Pilih Foto Baru</span>
+                                <span class="label-text-alt text-xs">Format: JPG, PNG, Max: 2MB</span>
+                            </label>
+                            <input type="file" name="avatar" accept="image/*" class="file-input file-input-bordered file-input-md w-full" onchange="previewAvatar(event)" id="avatarInput">
+                            
+                            <!-- Preview -->
+                            <div id="avatarPreview" class="hidden mt-4">
+                                <p class="text-sm text-base-content/70 mb-2">Preview:</p>
+                                <div class="avatar">
+                                    <div class="w-24 h-24 rounded-full ring-2 ring-orange-600 ring-offset-base-100 ring-offset-1 overflow-hidden">
+                                        <img id="previewImage" src="" alt="Preview" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex gap-2 w-full max-w-xs">
+                            <button type="submit" class="btn bg-orange-600 hover:bg-orange-700 text-white flex-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                Upload Foto
+                            </button>
+                            @if ($pl->foto)
+                                <button type="button" class="btn btn-error text-white flex-1" onclick="removeAvatar()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                    Hapus
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         {{-- PROFILE SETTINGS --}}
 
         <div class="flex-1">
@@ -259,3 +331,59 @@
 
     </div>
 @endsection
+
+@push('scripts')
+<script>
+function previewAvatar(event) {
+    const file = event.target.files && event.target.files[0];
+    const preview = document.getElementById('avatarPreview');
+    const previewImage = document.getElementById('previewImage');
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            preview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.classList.add('hidden');
+        previewImage.src = '';
+    }
+}
+
+function removeAvatar() {
+    if (confirm('Apakah Anda yakin ingin menghapus foto profil?')) {
+        // Create form for removing avatar
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '{{ route('dashboard.pelanggan.settings.avatar.remove') }}';
+        
+        // Add CSRF token
+        const csrf = document.createElement('input');
+        csrf.type = 'hidden';
+        csrf.name = '_token';
+        csrf.value = '{{ csrf_token() }}';
+        form.appendChild(csrf);
+        
+        // Add method override for DELETE
+        const method = document.createElement('input');
+        method.type = 'hidden';
+        method.name = '_method';
+        method.value = 'DELETE';
+        form.appendChild(method);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+// Reset preview when file input is cleared
+document.getElementById('avatarInput').addEventListener('change', function(e) {
+    if (!e.target.files || e.target.files.length === 0) {
+        document.getElementById('avatarPreview').classList.add('hidden');
+        document.getElementById('previewImage').src = '';
+    }
+});
+</script>
+@endpush

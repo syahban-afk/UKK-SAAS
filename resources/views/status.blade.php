@@ -53,6 +53,12 @@
                                         • {{ \Carbon\Carbon::parse($order->pengiriman->tgl_kirim)->format('d M Y') }}
                                     @endif
                                 </div>
+                                @if ($order->pengiriman->bukti_foto)
+                                    <div class="mt-3">
+                                        <div class="text-sm text-gray-500 mb-2">Bukti Pengiriman</div>
+                                        <img src="{{ asset('storage/' . $order->pengiriman->bukti_foto) }}" alt="Bukti Pengiriman" class="rounded-xl border w-full max-h-64 object-cover">
+                                    </div>
+                                @endif
                             @else
                                 <div class="text-gray-400">Belum dikirim</div>
                             @endif

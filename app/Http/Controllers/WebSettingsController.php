@@ -17,6 +17,7 @@ class WebSettingsController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
         ]);
         $user->update($validated);
+
         return back()->with('status', 'Profil diperbarui.');
     }
 
@@ -27,6 +28,7 @@ class WebSettingsController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
         $user->update(['password' => $validated['password']]);
+
         return back()->with('status', 'Password diubah.');
     }
 
@@ -34,6 +36,7 @@ class WebSettingsController extends Controller
     {
         $user = Auth::user();
         DB::table('sessions')->where('user_id', $user->id)->delete();
+
         return back()->with('status', 'Logout dari semua perangkat berhasil.');
     }
 
@@ -44,6 +47,7 @@ class WebSettingsController extends Controller
         $guard->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/');
     }
 }

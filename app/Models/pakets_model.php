@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class pakets_model extends Model
 {
     protected $table = 'pakets';
+
     protected $fillable = [
         'nama_paket',
         'jenis',

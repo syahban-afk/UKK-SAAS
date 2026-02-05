@@ -13,10 +13,10 @@
         <!-- Alert Messages -->
         @if (session('status'))
             <div class="alert alert-success">
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 3a9 9 0 1 0 9 9a9 9 0 0 0 -9 -9" />
+                    <path d="M9 12l2 2l4 -4" />
                 </svg>
                 <span>{{ session('status') }}</span>
             </div>
@@ -24,10 +24,11 @@
 
         @if ($errors->any())
             <div class="alert alert-error">
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 3a9 9 0 1 0 9 9a9 9 0 0 0 -9 -9" />
+                    <path d="M12 9v4" />
+                    <path d="M12 16h.01" />
                 </svg>
                 <div>
                     @foreach ($errors->all() as $error)
@@ -44,10 +45,10 @@
                     <div class="card-body">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="rounded-lg bg-primary/10 p-3 text-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M12 12a5 5 0 1 0 -5 -5a5 5 0 0 0 5 5z" />
+                                    <path d="M7 21h10a4 4 0 0 0 -4 -4h-2a4 4 0 0 0 -4 4" />
                                 </svg>
                             </div>
                             <div>
@@ -78,10 +79,9 @@
                             </div>
                             <div class="card-actions justify-end mt-6">
                                 <button type="submit" class="btn bg-orange-600 hover:bg-orange-700 text-white w-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-4 w-4 mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M5 12l5 5l10 -10" />
                                     </svg>
                                     Simpan Perubahan
                                 </button>
@@ -97,10 +97,10 @@
                     <div class="card-body">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="rounded-lg bg-warning/10 p-3 text-warning">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M12 5m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                    <path d="M4 21v-2a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v2" />
                                 </svg>
                             </div>
                             <div>
@@ -130,10 +130,10 @@
                             </div>
                             <div class="card-actions justify-end mt-6">
                                 <button type="submit" class="btn bg-orange-600 hover:bg-orange-700 text-white w-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-4 w-4 mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M6 10l4 4l8 -8" />
+                                        <path d="M7 21h10a4 4 0 0 0 -4 -4h-2a4 4 0 0 0 -4 4" />
                                     </svg>
                                     Ganti Password
                                 </button>
@@ -149,11 +149,12 @@
             <div class="card-body">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="rounded-lg bg-error/10 p-3 text-error">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                        </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M12 9v4" />
+                                    <path d="M10 17h4" />
+                                    <path d="M5 19h14l-7 -15z" />
+                                </svg>
                     </div>
                     <div>
                         <h2 class="card-title">Account Management</h2>
@@ -187,10 +188,12 @@
                                 onsubmit="return confirm('Apakah Anda yakin ingin menonaktifkan akun? Tindakan ini tidak dapat dibatalkan.')">
                                 @csrf
                                 <button type="submit" class="btn btn-error w-full text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-4 w-4 mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M3 6l1 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2l1 -14" />
+                                        <path d="M15 10v10" />
+                                        <path d="M9 10v10" />
+                                        <path d="M10 6h4l1 1h-6l1 -1" />
                                     </svg>
                                     Deactivate Account
                                 </button>
@@ -201,10 +204,11 @@
                                 action="{{ route('dashboard.' . auth()->user()->level . '.settings.logout-others') }}">
                                 @csrf
                                 <button type="submit" class="btn btn-outline btn-block">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-4 w-4 mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M14 8v-4h-8a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h8v-4" />
+                                        <path d="M19 12h-13" />
+                                        <path d="M16 15l3 -3l-3 -3" />
                                     </svg>
                                     Logout dari Semua Perangkat
                                 </button>

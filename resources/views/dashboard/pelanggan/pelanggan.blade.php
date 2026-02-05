@@ -21,33 +21,100 @@
                 <button onclick="profile_modal.showModal()" class="btn btn-ghost btn-circle avatar">
                     <div class="w-12 rounded-full ring ring-orange-600 ring-offset-base-100 ring-offset-2">
                         <img
-                            src="{{ $pl->foto ?: 'https://ui-avatars.com/api/?name=' . urlencode($pl->nama_pelanggan) . '&color=7F9CF5&background=EBF4FF' }}" />
+                            src="{{ $pl->foto ? asset('storage/' . $pl->foto) : 'https://ui-avatars.com/api/?name=' . urlencode($pl->nama_pelanggan) . '&color=7F9CF5&background=EBF4FF' }}" />
                     </div>
                 </button>
             @endif
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div class="text-gray-500 text-sm">Total Pesanan</div>
-                <div class="text-2xl font-bold text-gray-900">{{ $metrics['totalOrders'] ?? 0 }}</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="card bg-base-100 border border-base-300">
+                <div class="card-body">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4">
+                        <div class="rounded-lg bg-primary/10 p-3 text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 17h-11v-14h-2" />
+                                <path d="M6 5l14 1l-1 7h-13" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-base-content/70">Total Pesanan</p>
+                            <h2 class="text-3xl font-bold">{{ $metrics['totalOrders'] ?? 0 }}</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div class="text-gray-500 text-sm">Pesanan Aktif</div>
-                <div class="text-2xl font-bold text-gray-900">{{ $metrics['activeOrders'] ?? 0 }}</div>
+            
+            <div class="card bg-base-100 border border-base-300">
+                <div class="card-body">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4">
+                        <div class="rounded-lg bg-warning/10 p-3 text-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                                <path d="M12 7v5l3 3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-base-content/70">Pesanan Aktif</p>
+                            <h2 class="text-3xl font-bold">{{ $metrics['activeOrders'] ?? 0 }}</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div class="text-gray-500 text-sm">Terkirim</div>
-                <div class="text-2xl font-bold text-gray-900">{{ $metrics['deliveredCount'] ?? 0 }}</div>
+            
+            <div class="card bg-base-100 border border-base-300">
+                <div class="card-body">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4">
+                        <div class="rounded-lg bg-success/10 p-3 text-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-package-check">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
+                                <path d="M12 12l8 -4.5" />
+                                <path d="M12 12l0 9" />
+                                <path d="M12 12l-8 -4.5" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-base-content/70">Terkirim</p>
+                            <h2 class="text-3xl font-bold">{{ $metrics['deliveredCount'] ?? 0 }}</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div class="text-gray-500 text-sm">Pesanan Terakhir</div>
-                <div class="text-sm text-gray-900 font-semibold">
-                    @if (!empty($lastOrder))
-                        {{ $lastOrder->no_resi }} • {{ $lastOrder->status_pesan }}
-                    @else
-                        Belum ada
-                    @endif
+            
+            <div class="card bg-base-100 border border-base-300">
+                <div class="card-body">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4">
+                        <div class="rounded-lg bg-info/10 p-3 text-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-receipt">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M5 21v-16l2 2l2 -2l2 2l2 -2l2 2l2 -2v16l-2 -2l-2 2l-2 -2l-2 2l-2 -2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-base-content/70">Pesanan Terakhir</p>
+                            <div class="text-sm font-semibold">
+                                @if (!empty($lastOrder))
+                                    {{ $lastOrder->no_resi }} • {{ $lastOrder->status_pesan }}
+                                @else
+                                    Belum ada
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

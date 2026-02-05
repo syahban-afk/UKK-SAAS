@@ -21,7 +21,8 @@
                         @endphp
                         <option value="">Semua Status</option>
                         @foreach ($statuses as $st)
-                            <option value="{{ $st }}" {{ $currentStatus === $st ? 'selected' : '' }}>{{ $st }}</option>
+                            <option value="{{ $st }}" {{ $currentStatus === $st ? 'selected' : '' }}>
+                                {{ $st }}</option>
                         @endforeach
                     </select>
                     <button class="btn btn-sm bg-orange-600 hover:bg-orange-700 text-white" type="submit">Filter</button>
@@ -46,10 +47,12 @@
                 <div class="card-body">
                     <div class="flex items-center gap-3">
                         <div class="rounded-lg bg-primary/10 p-3 text-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 7h18" />
-                                <path d="M5 7v14" />
-                                <path d="M19 7v14" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M6 6h15l-1.5 9h-12z" />
+                                <path d="M6 6l-2 9h16" />
+                                <path d="M9 20a1 1 0 1 0 0 -2a1 1 0 0 0 0 2" />
+                                <path d="M17 20a1 1 0 1 0 0 -2a1 1 0 0 0 0 2" />
                             </svg>
                         </div>
                         <div>
@@ -63,9 +66,11 @@
                 <div class="card-body">
                     <div class="flex items-center gap-3">
                         <div class="rounded-lg bg-warning/10 p-3 text-warning">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="9" />
-                                <path d="M12 7v5l3 3" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M12 6v6" />
+                                <path d="M12 18h.01" />
+                                <path d="M5 19h14l-7 -15z" />
                             </svg>
                         </div>
                         <div>
@@ -79,9 +84,9 @@
                 <div class="card-body">
                     <div class="flex items-center gap-3">
                         <div class="rounded-lg bg-info/10 p-3 text-info">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 12h18" />
-                                <path d="M12 3v18" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M12 6l-8 8h16z" />
                             </svg>
                         </div>
                         <div>
@@ -95,7 +100,8 @@
                 <div class="card-body">
                     <div class="flex items-center gap-3">
                         <div class="rounded-lg bg-success/10 p-3 text-success">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M5 12l5 5l10 -10" />
                             </svg>
                         </div>
@@ -112,7 +118,7 @@
             <div class="card-body">
                 @php
                     $orders = \App\Models\pemesanans_model::with(['pelanggan', 'detailPemesanans.paket', 'pengiriman'])
-                        ->when(request('status'), fn ($q, $st) => $q->where('status_pesan', $st))
+                        ->when(request('status'), fn($q, $st) => $q->where('status_pesan', $st))
                         ->orderByDesc('tgl_pesan')
                         ->paginate(15);
                 @endphp
@@ -127,6 +133,7 @@
                                 <th>Tgl Pesan</th>
                                 <th>Status</th>
                                 <th>Pengiriman</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -137,13 +144,15 @@
                                         'Menunggu Konfirmasi' => 'badge-warning',
                                         'Sedang Diproses' => 'badge-info',
                                         'Menunggu Kurir' => 'badge-secondary',
-                                        default => 'badge-success',
+                                        'Selesai' => 'badge-success',
+                                        default => 'badge-default',
                                     };
                                     $pengiriman = $order->pengiriman;
                                     $kirimInfo = $pengiriman
                                         ? ($pengiriman->status_kirim === 'Tiba Ditujuan'
                                             ? 'Tiba: ' . \Carbon\Carbon::parse($pengiriman->tgl_tiba)->format('d M Y')
-                                            : 'Kirim: ' . \Carbon\Carbon::parse($pengiriman->tgl_kirim)->format('d M Y'))
+                                            : 'Kirim: ' .
+                                                \Carbon\Carbon::parse($pengiriman->tgl_kirim)->format('d M Y'))
                                         : '-';
                                 @endphp
                                 <tr>
@@ -154,7 +163,32 @@
                                     <td>
                                         <span class="badge {{ $badgeClass }} badge-sm">{{ $order->status_pesan }}</span>
                                     </td>
-                                    <td>{{ $kirimInfo }}</td>
+                                    <td>
+                                        <div class="flex items-center gap-2">
+                                            <span>{{ $kirimInfo }}</span>
+
+                                        </div>
+                                        @if ($pengiriman && $pengiriman->bukti_foto)
+                                            <dialog id="proof_{{ $order->id }}" class="modal">
+                                                <div class="modal-box rounded-2xl max-w-lg">
+                                                    <h3 class="font-bold text-lg mb-4">Bukti Pengiriman</h3>
+                                                    <img src="{{ asset('storage/' . $pengiriman->bukti_foto) }}"
+                                                        alt="Bukti Pengiriman"
+                                                        class="rounded-xl border w-full max-h-[70vh] object-cover">
+                                                    <div class="modal-action">
+                                                        <button type="button" class="btn btn-ghost"
+                                                            onclick="proof_{{ $order->id }}.close()">Tutup</button>
+                                                    </div>
+                                                </div>
+                                            </dialog>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($pengiriman && $pengiriman->bukti_foto)
+                                            <button type="button" class="btn btn-success text-white btn-xs"
+                                                onclick="proof_{{ $order->id }}.showModal()">Lihat Bukti</button>
+                                        @endif
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
@@ -164,7 +198,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div class="mt-4">
                     {{ $orders->withQueryString()->links() }}
                 </div>

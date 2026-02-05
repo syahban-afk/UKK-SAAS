@@ -40,6 +40,7 @@
                                                 'Menunggu Konfirmasi' => 'badge-warning',
                                                 'Sedang Diproses' => 'badge-info',
                                                 'Menunggu Kurir' => 'badge-secondary',
+                                                'Selesai' => 'badge-success',
                                                 default => 'badge-ghost',
                                             };
                                         @endphp

@@ -31,9 +31,10 @@ class DatabaseSeeder extends Seeder
             ['email' => 'kurir@gmail.com'],
             ['name' => 'Kurir', 'password' => Hash::make('kurir123'), 'level' => 'kurir']
         );
- 
+
         $this->call([
             JenisPembayaransSeeder::class,
+            DetailJenisPembayaransSeeder::class,
             PaketsSeeder::class,
             PelanggansSeeder::class,
             PemesanansSeeder::class,

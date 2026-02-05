@@ -2,14 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\pemesanans_model;
-use App\Models\pelanggans_model;
-use App\Models\jenis_pembayarans_model;
 use App\Models\detail_pemesanans_model;
+use App\Models\jenis_pembayarans_model;
 use App\Models\pakets_model;
-use Illuminate\Support\Str;
+use App\Models\pelanggans_model;
+use App\Models\pemesanans_model;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class PemesanansSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class PemesanansSeeder extends Seeder
         $pelangganIds = pelanggans_model::pluck('id')->all();
         $jenisIds = jenis_pembayarans_model::pluck('id')->all();
         $pakets = pakets_model::select(['id', 'harga_paket'])->get();
-        if (!$pelangganIds || !$jenisIds || !$pakets->count()) {
+        if (! $pelangganIds || ! $jenisIds || ! $pakets->count()) {
             return;
         }
         $now = Carbon::now();
@@ -29,7 +29,7 @@ class PemesanansSeeder extends Seeder
             $pemesanan = pemesanans_model::create([
                 'id_pelanggan' => $pelangganIds[array_rand($pelangganIds)],
                 'id_jenis_bayar' => $jenisIds[array_rand($jenisIds)],
-                'no_resi' => 'RES' . Str::upper(Str::random(10)),
+                'no_resi' => 'RES'.Str::upper(Str::random(10)),
                 'tgl_pesan' => $tglPesan,
                 'status_pesan' => $status,
                 'total_bayar' => 0,

@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\pelanggans_model;
-use Faker\Factory as FakerFactory;
-use Illuminate\Support\Arr;
 use Carbon\Carbon;
+use Faker\Factory as FakerFactory;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 
 class PelanggansSeeder extends Seeder
 {

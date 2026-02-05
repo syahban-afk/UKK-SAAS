@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\detail_jenis_pembayarans_model;
+use Illuminate\Http\Request;
 
 class detail_jenis_pembayarans_controller extends Controller
 {
     public function index(Request $request)
     {
         $perPage = (int) ($request->query('per_page', 15));
+
         return response()->json(detail_jenis_pembayarans_model::with('jenisPembayaran')->paginate($perPage));
     }
 
@@ -22,12 +23,14 @@ class detail_jenis_pembayarans_controller extends Controller
             'logo' => ['required', 'string', 'max:255'],
         ]);
         $detail = detail_jenis_pembayarans_model::create($validated);
+
         return response()->json($detail, 201);
     }
 
     public function show(string $id)
     {
         $detail = detail_jenis_pembayarans_model::with('jenisPembayaran')->findOrFail($id);
+
         return response()->json($detail);
     }
 
@@ -41,6 +44,7 @@ class detail_jenis_pembayarans_controller extends Controller
             'logo' => ['sometimes', 'string', 'max:255'],
         ]);
         $detail->update($validated);
+
         return response()->json($detail);
     }
 
@@ -48,6 +52,7 @@ class detail_jenis_pembayarans_controller extends Controller
     {
         $detail = detail_jenis_pembayarans_model::findOrFail($id);
         $detail->delete();
+
         return response()->json(null, 204);
     }
 }

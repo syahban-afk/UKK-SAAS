@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\jenis_pembayarans_model;
 use App\Models\pakets_model;
 use App\Models\pemesanans_model;
-use App\Models\jenis_pembayarans_model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +35,7 @@ class PelangganDashboardController extends Controller
                 'Menunggu Konfirmasi' => 'bg-yellow-100 text-yellow-700',
                 'Sedang Diproses' => 'bg-blue-100 text-blue-700',
                 'Menunggu Kurir' => 'bg-purple-100 text-purple-700',
+                'Selesai' => 'bg-green-100 text-green-700',
                 default => 'bg-gray-100 text-gray-700',
             };
             $o->pengirimanBadgeClass = $o->pengiriman
@@ -43,6 +44,7 @@ class PelangganDashboardController extends Controller
                     : 'bg-blue-100 text-blue-700')
                 : null;
             $o->tgl_pesan_fmt = \Carbon\Carbon::parse($o->tgl_pesan)->format('d M Y');
+
             return $o;
         }));
 

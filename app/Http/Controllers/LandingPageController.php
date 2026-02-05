@@ -11,6 +11,7 @@ class LandingPageController extends Controller
     public function index()
     {
         $featuredMenus = pakets_model::take(3)->get();
+
         return view('welcome', compact('featuredMenus'));
     }
 
@@ -23,6 +24,7 @@ class LandingPageController extends Controller
                 ->where('no_resi', $resi)
                 ->first();
         }
+
         return view('status', [
             'order' => $order,
             'resi' => $resi,
@@ -34,15 +36,16 @@ class LandingPageController extends Controller
         $kategoriNow = $request->query('kategori');
         $search = $request->query('search');
         $pakets = pakets_model::query()
-            ->when($kategoriNow, fn($q) => $q->where('kategori', $kategoriNow))
-            ->when($search, fn($q) => $q->where(function($qq) use ($search) {
+            ->when($kategoriNow, fn ($q) => $q->where('kategori', $kategoriNow))
+            ->when($search, fn ($q) => $q->where(function ($qq) use ($search) {
                 $qq->where('nama_paket', 'like', "%{$search}%")
-                   ->orWhere('jenis', 'like', "%{$search}%");
+                    ->orWhere('jenis', 'like', "%{$search}%");
             }))
             ->orderBy('nama_paket')
             ->paginate(12)
             ->withQueryString();
         $kategoris = ['Pernikahan', 'Selamatan', 'Ulang Tahun', 'Studi Tour', 'Rapat'];
+
         return view('menu', [
             'pakets' => $pakets,
             'kategoris' => $kategoris,

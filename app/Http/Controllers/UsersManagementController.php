@@ -63,13 +63,14 @@ class UsersManagementController extends Controller
             'password' => ['required', 'string', 'min:6'],
             'level' => ['required', 'string', 'in:admin,kurir'],
         ]);
-        if (!in_array($validated['level'], $allowed, true)) {
+        if (! in_array($validated['level'], $allowed, true)) {
             return back()->withErrors(['level' => 'Level tidak diizinkan.'])->withInput();
         }
         $user = User::create($validated);
         if ($current->level === 'owner') {
             return redirect()->route('dashboard.owner.users')->with('status', 'User berhasil dibuat.');
         }
+
         return redirect()->route('dashboard.admin.users')->with('status', 'User berhasil dibuat.');
     }
 }

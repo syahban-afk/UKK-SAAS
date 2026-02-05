@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\pemesanans_model;
+use App\Models\pengirimans_model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\pengirimans_model;
 
 class KurirPengirimanController extends Controller
 {
@@ -28,6 +29,7 @@ class KurirPengirimanController extends Controller
             'status_kirim' => 'Sedang Dikirim',
             'tgl_kirim' => now(),
         ]);
+
         return back()->with('status', 'Pesanan diambil untuk dikirim.');
     }
 
@@ -35,6 +37,7 @@ class KurirPengirimanController extends Controller
     {
         $validated = $request->validate([
             'id_pesan' => ['required', 'integer', 'exists:pemesanans,id'],
+            'bukti_foto' => ['required', 'file', 'image', 'max:5120'],
         ]);
         $user = Auth::user();
         $pengiriman = pengirimans_model::where('id_pesan', $validated['id_pesan'])->first();
@@ -47,10 +50,17 @@ class KurirPengirimanController extends Controller
         if ($pengiriman->status_kirim !== 'Sedang Dikirim') {
             return back()->withErrors(['status' => 'Pesanan belum dalam pengiriman.']);
         }
+        $path = $request->file('bukti_foto')->store('pengiriman_bukti', 'public');
         $pengiriman->update([
             'status_kirim' => 'Tiba Ditujuan',
             'tgl_tiba' => now(),
+            'bukti_foto' => $path,
         ]);
+        $order = pemesanans_model::find($validated['id_pesan']);
+        if ($order && $order->status_pesan !== 'Selesai') {
+            $order->update(['status_pesan' => 'Selesai']);
+        }
+
         return back()->with('status', 'Pesanan ditandai tiba di tujuan.');
     }
 }

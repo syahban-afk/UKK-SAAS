@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
 use App\Models\pelanggans_model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class pelanggans_controller extends Controller
 {
     public function index(Request $request)
     {
         $perPage = (int) ($request->query('per_page', 15));
+
         return response()->json(pelanggans_model::paginate($perPage));
     }
 
@@ -31,6 +32,7 @@ class pelanggans_controller extends Controller
         ]);
         $validated['password'] = Hash::make($validated['password']);
         $pelanggan = pelanggans_model::create($validated);
+
         return response()->json($pelanggan, 201);
     }
 
@@ -58,6 +60,7 @@ class pelanggans_controller extends Controller
             $validated['password'] = Hash::make($validated['password']);
         }
         $pelanggan->update($validated);
+
         return response()->json($pelanggan);
     }
 
@@ -65,6 +68,7 @@ class pelanggans_controller extends Controller
     {
         $pelanggan = pelanggans_model::findOrFail($id);
         $pelanggan->delete();
+
         return response()->json(null, 204);
     }
 }

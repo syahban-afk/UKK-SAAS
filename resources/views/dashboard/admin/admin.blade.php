@@ -28,10 +28,16 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
     <div class="card bg-base-100 border border-base-300">
       <div class="card-body">
-        <div class="flex items-center gap-3">
+        <div class="grid grid-cols-[auto_1fr] items-center gap-4">
           <div class="rounded-lg bg-primary/10 p-3 text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 7h18" /><path d="M5 7v14" /><path d="M19 7v14" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              <path d="M17 17h-11v-14h-2" />
+              <path d="M6 5l14 1l-1 7h-13" />
             </svg>
           </div>
           <div>
@@ -41,12 +47,17 @@
         </div>
       </div>
     </div>
+
     <div class="card bg-base-100 border border-base-300">
       <div class="card-body">
-        <div class="flex items-center gap-3">
+        <div class="grid grid-cols-[auto_1fr] items-center gap-4">
           <div class="rounded-lg bg-warning/10 p-3 text-warning">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+              <path d="M12 7v5l3 3" />
             </svg>
           </div>
           <div>
@@ -56,12 +67,16 @@
         </div>
       </div>
     </div>
+
     <div class="card bg-base-100 border border-base-300">
       <div class="card-body">
-        <div class="flex items-center gap-3">
+        <div class="grid grid-cols-[auto_1fr] items-center gap-4">
           <div class="rounded-lg bg-info/10 p-3 text-info">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 12h18" /><path d="M12 3v18" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12m0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" />
             </svg>
           </div>
           <div>
@@ -71,11 +86,15 @@
         </div>
       </div>
     </div>
+
     <div class="card bg-base-100 border border-base-300">
       <div class="card-body">
-        <div class="flex items-center gap-3">
+        <div class="grid grid-cols-[auto_1fr] items-center gap-4">
           <div class="rounded-lg bg-success/10 p-3 text-success">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-check">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M5 12l5 5l10 -10" />
             </svg>
           </div>
@@ -113,7 +132,8 @@
                 'Menunggu Konfirmasi' => 'badge-warning',
                 'Sedang Diproses' => 'badge-info',
                 'Menunggu Kurir' => 'badge-secondary',
-                default => 'badge-success',
+                'Selesai' => 'badge-success',
+                default => 'badge-default',
               };
             @endphp
             <tr>

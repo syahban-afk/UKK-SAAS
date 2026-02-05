@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\pakets_model;
-use Illuminate\Support\Arr;
+use Illuminate\Database\Seeder;
 
 class PaketsSeeder extends Seeder
 {

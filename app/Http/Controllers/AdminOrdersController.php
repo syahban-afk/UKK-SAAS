@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\pemesanans_model;
 use App\Models\pengirimans_model;
+use Illuminate\Http\Request;
 
 class AdminOrdersController extends Controller
 {
@@ -12,10 +12,11 @@ class AdminOrdersController extends Controller
     {
         $validated = $request->validate([
             'id' => ['required', 'integer', 'exists:pemesanans,id'],
-            'status_pesan' => ['required', 'string', 'in:Menunggu Konfirmasi,Sedang Diproses,Menunggu Kurir'],
+            'status_pesan' => ['required', 'string', 'in:Menunggu Konfirmasi,Sedang Diproses,Menunggu Kurir,Selesai'],
         ]);
         $order = pemesanans_model::findOrFail($validated['id']);
         $order->update(['status_pesan' => $validated['status_pesan']]);
+
         return back()->with('status', 'Status pesanan diubah.');
     }
 
@@ -35,6 +36,7 @@ class AdminOrdersController extends Controller
                 'tgl_tiba' => null,
             ]
         );
+
         return back()->with('status', 'Kurir diassign.');
     }
 
@@ -49,7 +51,12 @@ class AdminOrdersController extends Controller
                 'status_kirim' => 'Tiba Ditujuan',
                 'tgl_tiba' => now(),
             ]);
+            $order = pemesanans_model::find($validated['id_pesan']);
+            if ($order) {
+                $order->update(['status_pesan' => 'Selesai']);
+            }
         }
+
         return back()->with('status', 'Pesanan ditandai tiba.');
     }
 }

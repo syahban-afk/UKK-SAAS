@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class pengirimans_model extends Model
 {
     protected $table = 'pengirimans';
+
     protected $fillable = [
         'tgl_kirim',
         'tgl_tiba',

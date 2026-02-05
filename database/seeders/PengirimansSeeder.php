@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\pengirimans_model;
 use App\Models\pemesanans_model;
+use App\Models\pengirimans_model;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class PengirimansSeeder extends Seeder
 {
     public function run(): void
     {
         $kurir = User::where('level', 'kurir')->first();
-        if (!$kurir) {
+        if (! $kurir) {
             return;
         }
         $orders = pemesanans_model::select(['id', 'tgl_pesan'])->inRandomOrder()->limit(240)->get();

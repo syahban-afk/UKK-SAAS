@@ -86,9 +86,13 @@
                 <div class="card-body">
                     <div class="flex items-center gap-3">
                         <div class="rounded-lg bg-success/10 p-3 text-success">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 1v22" />
-                                <path d="M17 5h-7a4 4 0 0 0 0 8h4a4 4 0 0 1 0 8h-7" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M7 10h6" />
+                                <path d="M7 14h6" />
+                                <path d="M7 18h6" />
+                                <path d="M17 7l-3 3l3 3" />
+                                <path d="M4 4h16v16H4z" />
                             </svg>
                         </div>
                         <div>
@@ -102,10 +106,12 @@
                 <div class="card-body">
                     <div class="flex items-center gap-3">
                         <div class="rounded-lg bg-primary/10 p-3 text-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 7h18" />
-                                <path d="M5 7v14" />
-                                <path d="M19 7v14" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M6 6h15l-1.5 9h-12z" />
+                                <path d="M6 6l-2 9h16" />
+                                <path d="M9 20a1 1 0 1 0 0 -2a1 1 0 0 0 0 2" />
+                                <path d="M17 20a1 1 0 1 0 0 -2a1 1 0 0 0 0 2" />
                             </svg>
                         </div>
                         <div>
@@ -119,10 +125,11 @@
                 <div class="card-body">
                     <div class="flex items-center gap-3">
                         <div class="rounded-lg bg-warning/10 p-3 text-warning">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 7h12" />
-                                <path d="M6 11h12" />
-                                <path d="M6 15h12" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M4 19h16" />
+                                <path d="M8 15v-8h8v8" />
+                                <path d="M10 11h4" />
                             </svg>
                         </div>
                         <div>
@@ -136,9 +143,11 @@
                 <div class="card-body">
                     <div class="flex items-center gap-3">
                         <div class="rounded-lg bg-info/10 p-3 text-info">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M7 11a4 4 0 1 0 0-8a4 4 0 0 0 0 8z" />
-                                <path d="M3 21v-2a4 4 0 0 1 4 -4h3" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                <path d="M17 11a4 4 0 1 0 0 8" />
+                                <path d="M7 11a4 4 0 1 0 0 8" />
                             </svg>
                         </div>
                         <div>

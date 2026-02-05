@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('id_jenis_bayar');
             $table->string('no_resi', 30)->unique();
             $table->dateTime('tgl_pesan');
-            $table->enum('status_pesan', ['Menunggu Konfirmasi', 'Sedang Diproses', 'Menunggu Kurir'])->default('Menunggu Konfirmasi');
+            $table->enum('status_pesan', ['Menunggu Konfirmasi', 'Sedang Diproses', 'Menunggu Kurir', 'Selesai'])->default('Menunggu Konfirmasi');
             $table->unsignedBigInteger('total_bayar');
             $table->timestamps();
         });

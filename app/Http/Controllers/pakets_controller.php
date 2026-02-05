@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\pakets_model;
+use Illuminate\Http\Request;
 
 class pakets_controller extends Controller
 {
     public function index(Request $request)
     {
         $perPage = (int) ($request->query('per_page', 15));
+
         return response()->json(pakets_model::paginate($perPage));
     }
 
@@ -27,6 +28,7 @@ class pakets_controller extends Controller
             'foto3' => ['required', 'string', 'max:255'],
         ]);
         $paket = pakets_model::create($validated);
+
         return response()->json($paket, 201);
     }
 
@@ -50,6 +52,7 @@ class pakets_controller extends Controller
             'foto3' => ['sometimes', 'string', 'max:255'],
         ]);
         $paket->update($validated);
+
         return response()->json($paket);
     }
 
@@ -57,6 +60,7 @@ class pakets_controller extends Controller
     {
         $paket = pakets_model::findOrFail($id);
         $paket->delete();
+
         return response()->json(null, 204);
     }
 }
