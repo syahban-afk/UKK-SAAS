@@ -21,24 +21,5 @@ class DatabaseSeeder extends Seeder
             ['email' => 'owner@gmail.com'],
             ['name' => 'Owner', 'password' => Hash::make('owner123'), 'level' => 'owner']
         );
-
-        User::firstOrCreate(
-            ['email' => 'admin@gmail.com'],
-            ['name' => 'Admin', 'password' => Hash::make('admin123'), 'level' => 'admin']
-        );
-
-        User::firstOrCreate(
-            ['email' => 'kurir@gmail.com'],
-            ['name' => 'Kurir', 'password' => Hash::make('kurir123'), 'level' => 'kurir']
-        );
-
-        $this->call([
-            JenisPembayaransSeeder::class,
-            DetailJenisPembayaransSeeder::class,
-            PaketsSeeder::class,
-            PelanggansSeeder::class,
-            PemesanansSeeder::class,
-            PengirimansSeeder::class,
-        ]);
     }
 }
